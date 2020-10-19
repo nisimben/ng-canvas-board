@@ -15,6 +15,11 @@ export class DbService {
     name: 'bbb',
     email: 'a@a.com',
     password: 1234
+  },
+  {
+    name: '1',
+    email: '',
+    password: 1
   }
   ]
   public users: BehaviorSubject<User> = new BehaviorSubject<any>(null)

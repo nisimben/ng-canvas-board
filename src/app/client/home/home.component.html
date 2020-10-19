@@ -1,2 +1,9 @@
 <p>home works!</p>
 <h1>welcome back {{ user }} !! </h1>
+<h1>Drawing with mouse events</h1>
+<canvas #canvas ></canvas>
+<button class ="reset" (click)="clearCanvas()">clear</button>
+<div *ngIf="lineSize">
+
+    <button class ="enlargeLine" (click)="enlargeLine()">+</button>
+</div>

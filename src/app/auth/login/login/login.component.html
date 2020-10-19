@@ -3,12 +3,17 @@
         <h3>Login</h3>
         <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
             
-           <span *ngIf="result !== null"><h1><span>Welcome {{result}}</span></h1></span> 
-
-           <div class="alert-danger"
+           <span *ngIf="result !== null"><h1><span>Welcome {{result}} !!</span></h1><br><h3>hit the button login</h3></span>
+           <!-- <div class="alert-danger"
             *ngIf="notRecognized !== null">{{notRecognized}}
-            <button type="button" (click)="closeError()">x</button>
-        </div>
+            <button type="button" >x</button>
+        </div> -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert"
+            *ngIf="notRecognized !== null">{{notRecognized}}
+            <button type="button" class="close" (click)="closeError()"data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
            
                
             <div class="form-group">
@@ -33,7 +38,7 @@
             </div>
             <a routerLinkActive="router-link-active"  type="button"
              class="btn btn-primary" 
-             routerLink="reset">
+             routerLink="/reset">
                 Reset Password
              </a>
 
