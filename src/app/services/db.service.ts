@@ -22,7 +22,7 @@ export class DbService {
     password: 1
   }
   ]
-  public users: BehaviorSubject<User> = new BehaviorSubject<any>(null)
+  public users: BehaviorSubject<User> = new BehaviorSubject<User>(null)
   // current = this.users.asObservable()
 
   getUser() {

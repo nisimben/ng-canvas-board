@@ -10,9 +10,10 @@ import { User } from 'src/app/server/db';
 export class HomeComponent implements OnInit, AfterViewInit {
   user: User
   cx: CanvasRenderingContext2D
-  lineSize:any =3
+  lineWidth =3    
   @Input() public width = 560;
   @Input() public height = 360;
+
   
   @ViewChild('canvas') public canvas: ElementRef;
   constructor(private svDb: DbService) { }
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
     this.cx = canvasEl.getContext('2d');
-    this.cx.lineWidth = this.lineSize 
+    // this.cx.lineWidth = this.lineSize 
 
     canvasEl.width = this.width;
     canvasEl.height = this.height;
@@ -44,14 +45,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
       x = e.offsetX;
       y = e.offsetY;
       isDrawing = true;
+      this.cx.lineWidth= this.lineWidth
     });
 
     canvasEl.addEventListener('mousemove', e => {
       if (isDrawing === true) {
-        drawLine(this.cx, x, y, e.offsetX, e.offsetY);
+        drawLine(this.cx, x, y, e.offsetX, e.offsetY );
         x = e.offsetX;
         y = e.offsetY;
-        this.cx.lineWidth =this.lineSize
+        this.cx.lineWidth= this.lineWidth
+        
       }
     });
 
@@ -66,7 +69,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     function drawLine(context, x1, y1, x2, y2) {
       context.beginPath();
       context.strokeStyle = 'black';
-      context.lineWidth = this.lineSize;
+      context.lineCap = 'round';
+      // context.lineWidth = this.lineWidth
       context.moveTo(x1, y1);
       context.lineTo(x2, y2);
       context.stroke();
@@ -74,11 +78,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     }
 
+    
   }
 
+   enlargeLine() {  
+    this.lineWidth++
+    console.log(this.lineWidth);
+    
+  }
 
   ngOnInit(): void {
-    
 
     this.svDb.getUser().subscribe((val) => {
       this.user = val
@@ -89,12 +98,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     console.log('clear that canvas');
     this.cx.clearRect(0, 0, this.width, this.height);
   }
-  enlargeLine() {
-    
-    this.cx.lineWidth = this.lineSize++
-    console.log(this.lineSize);
 
-  }
+ 
   
 
 

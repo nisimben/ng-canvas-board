@@ -3,3 +3,6 @@ canvas {
   width: 560px;
   height: 360px;
 }
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
