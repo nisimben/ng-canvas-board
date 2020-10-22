@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { DbService } from 'src/app/services/db.service';
-import { User } from 'src/app/server/db';
+import { User } from 'src/app/models/UserModel';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-home',
@@ -10,18 +11,31 @@ import { User } from 'src/app/server/db';
 export class HomeComponent implements OnInit, AfterViewInit {
   user: User
   cx: CanvasRenderingContext2D
-  lineWidth =3    
+  message: string
+  messages: string[] = [];
+  lineWidth = 3
   @Input() public width = 560;
   @Input() public height = 360;
 
-  
-  @ViewChild('canvas') public canvas: ElementRef;
-  constructor(private svDb: DbService) { }
 
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('cursor ') cursor: ElementRef;
+
+  constructor(private svDb: DbService, private chatService: ChatService) { }
+  /**
+   * CHAT
+   */
+  sendMessage() {
+    this.chatService.sendMessage(this.message);
+    this.message = '';
+  }
+
+  /**
+   * CANVAS
+   */
   ngAfterViewInit(): void {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
     this.cx = canvasEl.getContext('2d');
-    // this.cx.lineWidth = this.lineSize 
 
     canvasEl.width = this.width;
     canvasEl.height = this.height;
@@ -33,7 +47,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     let isDrawing = false;
     let x = 0;
     let y = 0;
-    
+
     this.cx.strokeStyle = '#000000';
 
 
@@ -45,16 +59,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
       x = e.offsetX;
       y = e.offsetY;
       isDrawing = true;
-      this.cx.lineWidth= this.lineWidth
+      this.cx.lineWidth = this.lineWidth
+
     });
 
     canvasEl.addEventListener('mousemove', e => {
       if (isDrawing === true) {
-        drawLine(this.cx, x, y, e.offsetX, e.offsetY );
+        drawLine(this.cx, x, y, e.offsetX, e.offsetY);
         x = e.offsetX;
         y = e.offsetY;
-        this.cx.lineWidth= this.lineWidth
-        
+        this.cx.lineWidth = this.lineWidth
+
       }
     });
 
@@ -70,37 +85,47 @@ export class HomeComponent implements OnInit, AfterViewInit {
       context.beginPath();
       context.strokeStyle = 'black';
       context.lineCap = 'round';
-      // context.lineWidth = this.lineWidth
       context.moveTo(x1, y1);
       context.lineTo(x2, y2);
       context.stroke();
       context.closePath();
-
     }
 
-    
+
   }
 
-   enlargeLine() {  
+  enlargeLine() {
     this.lineWidth++
     console.log(this.lineWidth);
-    
+
   }
+  lowLine() {
+    this.lineWidth--
+    console.log(this.lineWidth);
 
-  ngOnInit(): void {
-
-    this.svDb.getUser().subscribe((val) => {
-      this.user = val
-      console.log(val);
-    })
   }
   clearCanvas() {
     console.log('clear that canvas');
     this.cx.clearRect(0, 0, this.width, this.height);
   }
 
- 
+  ngOnInit(): void {
+// subscribe to  DB Service
+    this.svDb.getUser().subscribe((val) => {
+      this.user = val
+      console.log(val);
+    })
+// subscribe to Chat Service
+this.chatService.getMessages().subscribe((val)=>{
+  this.messages.push(val)
+  console.log(val);
   
+})
+  }
+
+
+
+
 
 
 }

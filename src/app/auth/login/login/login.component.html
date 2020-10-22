@@ -36,8 +36,11 @@
                     id="loginPassword" 
                     placeholder="Password">
             </div>
-            <a routerLinkActive="router-link-active"  type="button"
-             class="btn btn-primary" 
+            <a 
+            class="btn btn-primary" 
+            (click)="navigateToReset()"
+             routerLinkActive="router-link-active" 
+             type="button"
              routerLink="/reset">
                 Reset Password
              </a>

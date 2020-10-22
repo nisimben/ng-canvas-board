@@ -19,8 +19,13 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "@types/socket.io-client": "^1.4.34",
+    "express": "^4.17.1",
     "font-awesome": "^4.7.0",
+    "nodemon": "^2.0.6",
     "rxjs": "~6.5.4",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
@@ -43,5 +48,17 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nisimben/ng-canvas-board.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nisimben/ng-canvas-board/issues"
+  },
+  "homepage": "https://github.com/nisimben/ng-canvas-board#readme"
 }

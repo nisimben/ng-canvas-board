@@ -39,6 +39,9 @@ export class LoginComponent {
    closeError(){
      this.notRecognized=null
    }
+   navigateToReset(){
+    this.router.navigate(['/reset'])
+  }
 
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../server/db'
+import { User } from '../models/UserModel'
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -18,6 +18,11 @@ export class DbService {
   },
   {
     name: '1',
+    email: '',
+    password: 1
+  },
+  {
+    name: 'nisim',
     email: '',
     password: 1
   }
