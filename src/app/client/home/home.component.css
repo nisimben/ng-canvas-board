@@ -1,10 +1,9 @@
-body {
-  cursor: url('/src/app/img/pencil.png'), default;
- }
+
 #draw {
   border: 1px solid black;
-  width: 560px;
-  height: 360px;
+
+  cursor: url(https://img.icons8.com/android/2x/pencil.png), auto;
+  
 }
 
 img{

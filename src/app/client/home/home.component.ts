@@ -14,8 +14,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   message: string
   messages: string[] = [];
   lineWidth = 3
-  @Input() public width = 560;
-  @Input() public height = 360;
+  @Input() public width = 800;
+  @Input() public height = 800;
 
 
   @ViewChild('canvas') canvas: ElementRef;
@@ -67,7 +67,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       if (isDrawing === true) {
         drawLine(this.cx, x, y, e.offsetX, e.offsetY);
         x = e.offsetX;
+        // console.log("x:"+x);
         y = e.offsetY;
+        // console.log("y:"+y);
         this.cx.lineWidth = this.lineWidth
 
       }
@@ -85,8 +87,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
       context.beginPath();
       context.strokeStyle = 'black';
       context.lineCap = 'round';
-      context.moveTo(x1, y1);
-      context.lineTo(x2, y2);
+      context.moveTo(x1+20, y1+20);
+      context.lineTo(x2+20, y2+20);
       context.stroke();
       context.closePath();
     }
